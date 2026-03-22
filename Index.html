@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12.A2 Scientia | Official Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particles"></canvas>
+    <div id="overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <aside id="sidebar" class="sidebar">
+        <div class="p-8 flex-1 overflow-y-auto">
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-atom text-white"></i>
+                </div>
+                <span class="font-extrabold text-xl tracking-tight">Scientia.co</span>
+            </div>
+
+            <div class="bg-black/20 rounded-3xl p-6 text-center mb-8 border border-white/5">
+                <div class="relative w-16 h-16 mx-auto mb-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Teacher" class="rounded-full bg-slate-800 border-2 border-indigo-500/20" alt="Guru">
+                </div>
+                <h3 class="font-bold text-sm">Bpk. Supriyadi</h3>
+                <p class="text-[9px] text-slate-500 uppercase tracking-widest mt-1 font-bold">Wali Kelas 12.A2</p>
+            </div>
+
+            <nav class="space-y-1">
+                <div onclick="showPage('dashboard')" id="btn-dashboard" class="nav-link active">
+                    <i class="fas fa-chart-pie mr-4 w-4"></i> Dashboard
+                </div>
+                <div onclick="showPage('members')" id="btn-members" class="nav-link">
+                    <i class="fas fa-users mr-4 w-4"></i> Anggota
+                </div>
+                <div onclick="showPage('schedule')" id="btn-schedule" class="nav-link">
+                    <i class="fas fa-calendar-check mr-4 w-4"></i> Jadwal & Piket
+                </div>
+                <div onclick="showPage('gallery')" id="btn-gallery" class="nav-link">
+                    <i class="fas fa-images mr-4 w-4"></i> Galeri
+                </div>
+                <div onclick="showPage('secret')" id="btn-secret" class="nav-link">
+                    <i class="fas fa-mask mr-4 w-4"></i> Pesan Rahasia
+                </div>
+            </nav>
+        </div>
+        <div class="p-6">
+            <div class="p-4 bg-indigo-600/10 rounded-2xl border border-indigo-500/20 text-center">
+                <p class="text-[10px] text-indigo-300 font-semibold">12.A2 Scientia © 2026</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="lg:hidden flex justify-between items-center mb-6">
+            <h1 class="text-xl font-black italic text-indigo-400">12.A2</h1>
+            <button onclick="toggleSidebar()" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="page-dashboard" class="page-content">
+            <div class="mb-10">
+                <h2 class="text-3xl font-extrabold tracking-tight">Dashboard <span class="text-indigo-400">Scientia</span></h2>
+                <p class="text-slate-500 text-sm mt-1">Status terkini ekosistem kelas 12.A2.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+                <div class="lg:col-span-2 glass-card p-6 bg-gradient-to-br from-indigo-600/20 to-transparent relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <span class="bg-indigo-500 text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-wider">Berita Utama</span>
+                            <h3 class="text-xl md:text-2xl font-bold mt-4 leading-tight">Ujian Akhir Semester dijadwalkan mulai 2 Juni. Persiapkan dirimu!</h3>
+                        </div>
+                        <div class="mt-6 flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[10px]"><i class="fas fa-user-edit"></i></div>
+                            <p class="text-indigo-300 text-xs font-semibold">Sekretaris Kelas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-8 flex flex-col justify-center items-center text-center">
+                    <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-3">Waktu Saat Ini</p>
+                    <h2 class="text-4xl font-black tracking-widest text-indigo-400" id="live-clock">00:00:00</h2>
+                    <p class="text-xs text-slate-400 mt-3" id="live-date">Sabtu, 22 Maret 2026</p>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <h4 class="font-bold mb-6 flex items-center gap-3">
+                    <span class="w-8 h-[2px] bg-indigo-500"></span>
+                    Pengurus Inti Kelas
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 flex items-center gap-5">
+                        <div class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-400 text-xl"><i class="fas fa-crown"></i></div>
+                        <div><p class="text-[10px] font-black text-slate-500 uppercase mb-1">Ketua Kelas</p><h5 class="font-bold">Aditya Pratama</h5></div>
+                    </div>
+                    <div class="glass-card p-6 flex items-center gap-5">
+                        <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-xl"><i class="fas fa-feather-alt"></i></div>
+                        <div><p class="text-[10px] font-black text-slate-500 uppercase mb-1">Sekretaris</p><h5 class="font-bold">Sarah Amelia</h5></div>
+                    </div>
+                    <div class="glass-card p-6 flex items-center gap-5">
+                        <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400 text-xl"><i class="fas fa-wallet"></i></div>
+                        <div><p class="text-[10px] font-black text-slate-500 uppercase mb-1">Bendahara</p><h5 class="font-bold">Rina Wijaya</h5></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase mb-4">Piket Hari Ini</h4>
+                    <div class="flex flex-wrap gap-2" id="dash-piket"></div>
+                </div>
+                <div class="glass-card p-6">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase mb-4">Mata Pelajaran</h4>
+                    <h5 class="text-xl font-black" id="dash-subject">Memuat...</h5>
+                    <p class="text-[10px] text-indigo-400 mt-1 font-bold">Status: Aktif</p>
+                </div>
+                <div class="glass-card p-6">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Graduation Countdown</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="text-center"><p class="text-xl font-black" id="cd-days-dash">0</p><p class="text-[8px] font-bold text-slate-600">HARI</p></div>
+                        <div class="text-center"><p class="text-xl font-black" id="cd-hours-dash">0</p><p class="text-[8px] font-bold text-slate-600">JAM</p></div>
+                        <div class="text-center"><p class="text-xl font-black" id="cd-mins-dash">0</p><p class="text-[8px] font-bold text-slate-600">MIN</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-members" class="page-content hidden">
+            <h2 class="text-3xl font-extrabold mb-8">Database <span class="text-indigo-400">Siswa</span></h2>
+            <div id="members-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"></div>
+        </div>
+
+        <div id="page-schedule" class="page-content hidden">
+            <h2 class="text-3xl font-extrabold mb-10 italic uppercase tracking-tighter">Agenda <span class="text-indigo-400">Mingguan</span></h2>
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                <div class="glass-card p-8">
+                    <h4 class="font-bold mb-6 text-indigo-400 flex items-center gap-3"><i class="fas fa-book"></i> Jadwal Mapel</h4>
+                    <div id="full-sched" class="space-y-3"></div>
+                </div>
+                <div class="glass-card p-8">
+                    <h4 class="font-bold mb-6 text-emerald-400 flex items-center gap-3"><i class="fas fa-broom"></i> Jadwal Piket</h4>
+                    <div id="full-piket" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-gallery" class="page-content hidden">
+            <h2 class="text-3xl font-extrabold mb-8">Memory <span class="text-indigo-400">Lane</span></h2>
+            <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4" id="gallery-container"></div>
+        </div>
+
+        <div id="page-secret" class="page-content hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="glass-card p-8">
+                        <h2 class="text-2xl font-black mb-2 uppercase italic tracking-tighter">Kirim <span class="text-indigo-400">Pesan</span></h2>
+                        <p class="text-xs text-slate-500 mb-8">Ungkapkan apa saja secara anonim.</p>
+                        <div class="space-y-4">
+                            <input type="text" id="msg-to" placeholder="Siapa tujuannya?" class="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-4 outline-none focus:border-indigo-500 transition text-sm">
+                            <textarea id="msg-content" rows="5" placeholder="Tuliskan pesan rahasiamu di sini..." class="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-4 outline-none focus:border-indigo-500 transition text-sm resize-none"></textarea>
+                            <button onclick="sendMsg()" class="w-full py-4 bg-indigo-600 rounded-xl font-bold hover:bg-indigo-700 transition">Kirim Pesan</button>
+                            <p id="msg-sent" class="hidden text-center text-xs text-emerald-400 font-bold">Pesan berhasil dikirim!</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-8">
+                        <h4 class="font-bold mb-6 flex items-center gap-3"><i class="fas fa-inbox text-indigo-400"></i> Pesan Terbaru</h4>
+                        <div class="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scroll" id="inbox-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
